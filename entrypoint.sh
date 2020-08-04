@@ -1,6 +1,5 @@
 #!/bin/ash
-mkdir -p /mnt/server
-cd /mnt/server
+cd /home/container
 
 if [[ ! ${INSTALL_REPO} = *\.git ]]; then
     INSTALL_REPO=$(echo -e ${INSTALL_REPO} | sed 's:/*$::')
@@ -12,8 +11,8 @@ echo "working on installing a node project from ${INSTALL_REPO}"
 if [ ! ${INSTALL_REPO} ]; then
     echo "assuming user will add files manually."
 else
-    if [ "$(ls -A /mnt/server)" ]; then
-        echo "/mnt/server directory is not empty."
+    if [ "$(ls -A /home/container)" ]; then
+        echo "/home/container directory is not empty."
         if [ -d .git ]; then
             echo ".git directory exists"
             if [ -f .git/config ]; then
@@ -30,7 +29,7 @@ else
             git pull
         fi
     else
-        echo "/mnt/server is empty.\ncloning files into repo"
+        echo "/home/container is empty.\ncloning files into repo"
         if [ -z ${INSTALL_BRANCH} ]; then
             echo "assuming master branch"
             INSTALL_BRANCH=master
@@ -42,7 +41,7 @@ else
 fi
 
 if [ -f ${INDEX_JS} ]; then
-    pnpm i
+    pnpm i --reporter=silent
     echo "install complete"
     node ${INDEX_JS}
 else
