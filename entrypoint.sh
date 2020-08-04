@@ -1,5 +1,4 @@
 #!/bin/ash
-cd /home/container
 
 if [[ ! ${INSTALL_REPO} = *\.git ]]; then
     INSTALL_REPO=$(echo -e ${INSTALL_REPO} | sed 's:/*$::')
@@ -41,7 +40,7 @@ else
 fi
 
 if [ -f ${INDEX_JS} ]; then
-    pnpm i --reporter=silent
+    pnpm i --reporter=append-only
     echo "install complete"
     node ${INDEX_JS}
 else
