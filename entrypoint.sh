@@ -33,14 +33,17 @@ else
             echo "assuming master branch"
             INSTALL_BRANCH=master
         fi
-        
+
         echo "running 'git clone --single-branch --branch ${INSTALL_BRANCH} ${INSTALL_REPO} .'"
         git clone --single-branch --branch ${INSTALL_BRANCH} ${INSTALL_REPO} .
     fi
 fi
 
-if [ -f ${INDEX_JS} ]; then
+if [ -f package.json ] && [ ! ${NO_INSTALL} ]; then
     pnpm i --reporter=append-only
+fi
+
+if [ -f ${INDEX_JS} ]; then
     echo "install complete"
     node ${INDEX_JS}
 else
