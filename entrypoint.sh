@@ -10,8 +10,8 @@ echo "working on installing a node project from ${INSTALL_REPO}"
 if [ ! ${INSTALL_REPO} ]; then
     echo "assuming user will add files manually."
 else
-    if [ "$(ls -A /home/container)" ]; then
-        echo "/home/container directory is not empty."
+    if [ "$(ls -A /home/container/app)" ]; then
+        echo "/home/container/app directory is not empty."
         if [ -d .git ]; then
             echo ".git directory exists"
             if [ -f .git/config ]; then
@@ -28,7 +28,7 @@ else
             git pull
         fi
     else
-        echo "/home/container is empty.\ncloning files into repo"
+        echo "/home/container/app is empty.\ncloning files into repo"
         if [ -z ${INSTALL_BRANCH} ]; then
             echo "assuming master branch"
             INSTALL_BRANCH=master
@@ -41,10 +41,10 @@ fi
 
 if [ -f package.json ] && [ ! ${NO_INSTALL} ]; then
     pnpm i --reporter=append-only
+    echo "install complete"
 fi
 
 if [ -f ${INDEX_JS} ]; then
-    echo "install complete"
     node ${INDEX_JS}
 else
     echo "No node.js file found to run."

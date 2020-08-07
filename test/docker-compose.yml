@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+    test:
+        image: creepinson/pnpm
+        volumes:
+            - /c/Users/thebo/Documents/docker-test/test-data:/home/container/app
+        environment:
+            - INSTALL_REPO=https://github.com/creepinson/uwu-bot
+            - INDEX_JS=src/index.js

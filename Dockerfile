@@ -7,7 +7,9 @@ RUN apk add --no-cache git && adduser -D -h /home/container container
 # Install pnpm
 RUN npm install -g pnpm
 
-WORKDIR /home/container
+RUN npm config set store-dir /home/container/.pnpm-store
+
+WORKDIR /home/container/app
 
 COPY ./entrypoint.sh /entrypoint.sh
 CMD ["/bin/ash", "/entrypoint.sh"]
