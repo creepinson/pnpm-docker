@@ -11,5 +11,7 @@ RUN npm config set store-dir /home/container/.pnpm-store
 
 WORKDIR /home/container/app
 
+RUN chown -R container /home/container/app
+
 COPY ./entrypoint.sh /entrypoint.sh
 CMD ["/bin/ash", "/entrypoint.sh"]
