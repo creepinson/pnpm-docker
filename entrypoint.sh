@@ -44,12 +44,12 @@ if [ -f package.json ] && [ ! ${NO_INSTALL} ]; then
     echo "install complete"
 fi
 
-if [ -f ${INDEX_JS} ]; then
+if [ -z ${START_COMMAND} ]; then
+    pnpm ${START_COMMAND}
+fi
+
+if [ -z ${INDEX_JS} && -f ${INDEX_JS} ]; then
     node ${INDEX_JS}
 else
-    if [ -z ${START_COMMAND} ]; then
-        pnpm ${START_COMMAND}
-    else
-        echo "No node.js file found to run."
-    fi
+    echo "No node.js file found to run."
 fi
