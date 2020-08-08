@@ -1,4 +1,5 @@
 mkdir -p /home/container/.tmp
+export TMPDIR=/home/container/.tmp
 
 if [[ ! ${INSTALL_REPO} = *\.git ]]; then
     INSTALL_REPO=$(echo -e ${INSTALL_REPO} | sed 's:/*$::')
