@@ -29,7 +29,7 @@ else
             git pull
         fi
     else
-        echo "/home/container/app is empty.\ncloning files into repo"
+        echo "/home/container/app is empty. cloning files into repo"
         if [ -z ${INSTALL_BRANCH} ]; then
             echo "assuming master branch"
             INSTALL_BRANCH=master
