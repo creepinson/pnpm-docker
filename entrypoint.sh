@@ -47,7 +47,7 @@ fi
 if [ -f ${INDEX_JS} ]; then
     node ${INDEX_JS}
 else
-    if [ -f ${START_COMMAND} ]; then
+    if [ -z ${START_COMMAND} ]; then
         pnpm ${START_COMMAND}
     else
         echo "No node.js file found to run."
