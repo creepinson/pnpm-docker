@@ -44,12 +44,28 @@ if [ -f package.json ] && [ ! ${NO_INSTALL} ]; then
     echo "install complete"
 fi
 
-if [ -z ${START_COMMAND} ]; then
-    pnpm ${START_COMMAND}
-fi
+PNPM_ARGUMENTS="${PNPM_ARGUMENTS//\'/}"
+readarray -t array < <(jq -r .[] <<<"$PNPM_ARGUMENTS")
+echo "Found pnpm arguments: $array"
+
+output=()
+
+for pnpmArgument in "${array[@]}"; do
+    echo "Running pnpm command: $pnpmArgument"
+    pnpm $pnpmArgument
+    output+=($?)
+done
 
 if [ -z ${INDEX_JS} ] && [ -f ${INDEX_JS} ]; then
-    node ${INDEX_JS}
+    node "$INDEX_JS"
+    output+=($?)
 else
     echo "No node.js file found to run."
 fi
+
+for i in "${output[@]}"; do
+    if [[ "0" != "$i" ]]; then
+        echo "An error occurred while running pnpm commands."
+        exit 1
+    fi
+done

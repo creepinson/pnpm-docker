@@ -7,4 +7,4 @@ services:
             - ./test-data:/home/container/app
         environment:
             - INSTALL_REPO=https://github.com/creepinson/uwu-bot
-            - START_COMMAND=run start
+            - PNPM_ARGUMENTS='["run start"]'
