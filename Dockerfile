@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:current-alpine3.10
 LABEL author="Theo Paris" maintainer="theo@throw-out-error.dev"
 
 # Install Git
