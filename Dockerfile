@@ -9,6 +9,7 @@ RUN npm install -g pnpm
 
 # Fix paths
 RUN pnpm config set store-dir /home/container/.pnpm-store
+RUN npm config set store-dir /home/container/.pnpm-store
 WORKDIR /home/container/app
 
 COPY ./entrypoint.sh /entrypoint.sh
