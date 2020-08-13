@@ -1,8 +1,11 @@
-FROM node:current-alpine3.10
+FROM node:current-alpine
 LABEL author="Theo Paris" maintainer="theo@throw-out-error.dev"
 
+USER root
+
 # Install Git
-RUN apk add --no-cache bash jq git && adduser -D -h /home/container container
+RUN apk add --no-cache bash jq git
+RUN adduser -D -h /home/container container
 
 # Install pnpm
 RUN npm install -g pnpm
