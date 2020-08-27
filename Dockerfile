@@ -2,7 +2,7 @@ FROM node:current-alpine
 LABEL author="Theo Paris" maintainer="theo@throw-out-error.dev"
 
 # Install Git
-RUN adduser -D -h /home/container container
+RUN adduser -D -h /home/container container && mkdir -p /home/container/.tmp
 
 # Fix paths
 USER root
