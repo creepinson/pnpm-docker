@@ -1,10 +1,19 @@
 version: "3"
-
 services:
-    test:
-        image: creepinson/pnpm
-        volumes:
-            - ./test-data:/home/container/app
+    app:
+        build:
+            context: ..
         environment:
-            - INSTALL_REPO=https://github.com/creepinson/uwu-bot
-            - PNPM_ARGUMENTS='["run start"]'
+            - INSTALL_REPO=https://github.com/creepinson/website-backend
+            - PNPM_ARGUMENTS='["run dev"]'
+            - MONGO_URI=mongodb://mongo:27017/website
+        ports:
+            - "8080:8080"
+        links:
+            - mongo
+        depends_on:
+            - mongo
+    mongo:
+        image: mongo
+        ports:
+            - "27017:27017"

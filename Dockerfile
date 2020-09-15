@@ -1,4 +1,4 @@
-FROM node:current-alpine3.10
+FROM node:current-alpine3.12
 LABEL author="Theo Paris" maintainer="theo@throw-out-error.dev"
 
 # Install Git
@@ -8,8 +8,9 @@ RUN apk add --no-cache bash jq git && adduser -D -h /home/container container
 RUN npm install -g pnpm
 
 # Fix paths
-USER container
 WORKDIR /home/container/app
+RUN chmod 777 -R /home/container/app
+USER container
 
 RUN pnpm config set store-dir /home/container/.pnpm-store
 RUN npm config set store-dir /home/container/.pnpm-store
