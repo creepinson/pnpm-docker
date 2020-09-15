@@ -14,8 +14,8 @@ ENV TMPDIR /home/container/.tmp
 
 # Fix paths
 WORKDIR /home/container/app
-RUN chmod 777 -R /home/container/app
-RUN chmod 777 -R /home/container/.tmp
+RUN chmod 777 -R /home/container/app && \
+    chmod 777 -R /home/container/.tmp
 
 USER container
 
