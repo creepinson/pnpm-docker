@@ -1,16 +1,16 @@
-FROM node:current-alpine3.12
+FROM node:current-alpine
 LABEL author="Theo Paris" maintainer="theo@throw-out-error.dev"
 
 # Install Git
-RUN apk add --no-cache bash jq git && adduser -D -h /home/container container
-
-# Install pnpm
-RUN npm install -g pnpm
+RUN adduser -D -h /home/container container && mkdir -p /home/container/.tmp
 
 # Fix paths
 WORKDIR /home/container/app
 RUN chmod 777 -R /home/container/app
 USER container
+
+# Install dependencies
+RUN apk add --no-cache bash jq git && npm install -g pnpm
 
 RUN pnpm config set store-dir /home/container/.pnpm-store
 RUN npm config set store-dir /home/container/.pnpm-store
